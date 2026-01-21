@@ -1,0 +1,16 @@
+wallet,token,buy_count,sell_count,usd_spent,usd_received,token_pnl,token_suffix,suspicious_pattern
+5VmT4H2WYwKD1A87U9znDvfUJ7x7dGgKPhzUQgs1i6ND,5dxdLpp7epQ9hEY14KUtYa8Bj4kb1ebiovyyUyDkbonk,4,37,124.52,4938.72,4814.20,bonk,HIGH - 9.25x sells vs buys on single token
+6opRaVh5ZDuG9TUdhqm6gZrHHcVQJxXFSFz4zXayCasi,5dxdLpp7epQ9hEY14KUtYa8Bj4kb1ebiovyyUyDkbonk,2,15,2262.03,6660.81,4398.78,bonk,MODERATE - Concentrated position
+AGbU8n6PSTbFezgHhHfjdRHYyjpBXP8uwGzVraUNUwZj,5dxdLpp7epQ9hEY14KUtYa8Bj4kb1ebiovyyUyDkbonk,2,15,2280.39,6372.07,4091.68,bonk,MODERATE - Concentrated position
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,2qg7D285MmV51NhvZWhgMd68P2nhS33sWDbPiAeZbonk,5,19,890.38,3829.75,2939.36,bonk,MODERATE - LaunchLab token
+BCagckXeMChUKrHEd6fKFA1uiWDtcmCXMsqaheLiUPJd,B525Qu5U81EB68AkMV981RjaK1oJBwAf8cCFXCsEeyz5,5,5,388.20,3219.63,2831.43,other,MODERATE - High profit single token
+79eMVGwFUS1aVAzDBcPF5tkbW9mJyMuxssaAmRdC71RR,68bdgVfoLjjFME3vb4VXLPsFWh4GMHoJuk4hNPCQbonk,1,9,562.63,3056.56,2493.93,bonk,HIGH - 9x sells vs buys
+1TXsKzewQzFb8MYidNCmvmPWTma1DWyC6fpvd5gQa7W,AEHFJpwy2Fvesku2JTeMBsFfii36MCstx8ZcCAAAn9iA,1,19,283.06,2619.47,2336.41,other,HIGH - 19x sells vs buys
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,RxmS5MnaQxmhxy5z1DLY5YF8ndewHBUXMaksisxbonk,18,12,1314.54,3493.07,2178.53,bonk,LOW - Balanced trading
+J2L495ZPcJ6Btuyd4YqXz5uw7hpKiQXGcLvALwumabED,B525Qu5U81EB68AkMV981RjaK1oJBwAf8cCFXCsEeyz5,3,11,252.47,1956.68,1704.21,other,MODERATE - High sell ratio
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,EwQ728TrvovEidpHg7oGg5UTYXQ1yrpCyD8HbzZrStgR,24,10,1440.46,2995.70,1555.23,other,LOW - More buys than sells
+JCD21JG4qQJg4oC8mXJ9mJWMF2R7PYA81vZ6CPVaX96H,B525Qu5U81EB68AkMV981RjaK1oJBwAf8cCFXCsEeyz5,5,10,402.26,1850.07,1447.81,other,MODERATE - High sell ratio
+59EEFfq3thxqvMH1mH2538hoGXQAi8fPEc6mYkdugs2s,B525Qu5U81EB68AkMV981RjaK1oJBwAf8cCFXCsEeyz5,5,10,391.23,1755.38,1364.15,other,MODERATE - High sell ratio
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,E1rE8CgwxCiztMdQcJsq457WZu2UNXAQcUHqFztrbonk,17,12,1251.77,2280.84,1029.07,bonk,LOW - Balanced trading
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,qY9GWPHFkCvvQ8ckowZRJDyt3vuAzkfRhtguukuqoSQ,11,8,686.31,1699.19,1012.89,other,LOW - Balanced trading
+CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o,HMXFKgf6KXUZRWGBaEegJh2bnVxn5eh68NvQkdBXMnXm,4,5,494.76,1292.12,797.36,other,LOW - Balanced trading

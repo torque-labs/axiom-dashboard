@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "campaign": "Axiom/Raydium PNL Leaderboard",
+    "period": "2026-01-19 to 2026-01-25",
+    "generated_at": "2026-01-21T16:00:00Z",
+    "data_through": "2026-01-21T15:00:00Z"
+  },
+  "summary": {
+    "total_unique_participants": 19156,
+    "total_volume_usd": 26907156.30,
+    "total_trades": 316887,
+    "total_pnl_distributed": 1631610.43,
+    "total_gains": 3471175.50,
+    "total_losses": -1839565.08
+  },
+  "daily_overview": [
+    {
+      "date": "2026-01-19",
+      "unique_wallets": 10858,
+      "total_trades": 145139,
+      "total_usd_volume": 13433481.17,
+      "unique_tokens": 2555,
+      "new_wallets": 10858,
+      "cumulative_wallets": 10858,
+      "day1_retention": 10858,
+      "retention_rate": 100.0
+    },
+    {
+      "date": "2026-01-20",
+      "unique_wallets": 10393,
+      "total_trades": 98013,
+      "total_usd_volume": 7605090.93,
+      "unique_tokens": 1638,
+      "new_wallets": 5278,
+      "cumulative_wallets": 16136,
+      "day1_retention": 5115,
+      "retention_rate": 47.1
+    },
+    {
+      "date": "2026-01-21",
+      "unique_wallets": 7767,
+      "total_trades": 73735,
+      "total_usd_volume": 5868584.20,
+      "unique_tokens": 863,
+      "new_wallets": 3020,
+      "cumulative_wallets": 19156,
+      "day1_retention": 3200,
+      "retention_rate": 29.5
+    }
+  ],
+  "day_over_day_changes": {
+    "wallets": {
+      "day1_to_day2": -4.3,
+      "day2_to_day3": -25.3
+    },
+    "volume": {
+      "day1_to_day2": -43.4,
+      "day2_to_day3": -22.8
+    },
+    "trades": {
+      "day1_to_day2": -32.5,
+      "day2_to_day3": -24.8
+    }
+  },
+  "trader_behavior": [
+    {
+      "date": "2026-01-19",
+      "total_traders": 10858,
+      "avg_volume_per_trader": 1237.20,
+      "median_volume": 254.92,
+      "p90_volume": 2919.65,
+      "avg_trades_per_trader": 13.4,
+      "avg_tokens_per_trader": 3.9
+    },
+    {
+      "date": "2026-01-20",
+      "total_traders": 10393,
+      "avg_volume_per_trader": 731.75,
+      "median_volume": 172.99,
+      "p90_volume": 1780.57,
+      "avg_trades_per_trader": 9.4,
+      "avg_tokens_per_trader": 2.9
+    },
+    {
+      "date": "2026-01-21",
+      "total_traders": 7767,
+      "avg_volume_per_trader": 755.54,
+      "median_volume": 191.22,
+      "p90_volume": 1865.62,
+      "avg_trades_per_trader": 9.5,
+      "avg_tokens_per_trader": 2.3
+    }
+  ],
+  "pnl_distribution": [
+    {
+      "date": "2026-01-19",
+      "total_wallets": 10858,
+      "big_winners": 1538,
+      "small_winners": 2707,
+      "small_losers": 5024,
+      "big_losers": 1589,
+      "pct_profitable": 39.1,
+      "total_pnl": 819246.20,
+      "avg_pnl": 75.45,
+      "total_gains": 1735014.67,
+      "total_losses": -915768.48,
+      "median_pnl": -3.07,
+      "p75_pnl": 14.94,
+      "p90_pnl": 208.71,
+      "p99_pnl": 2725.97
+    },
+    {
+      "date": "2026-01-20",
+      "total_wallets": 10393,
+      "big_winners": 1292,
+      "small_winners": 2606,
+      "small_losers": 5335,
+      "big_losers": 1160,
+      "pct_profitable": 37.5,
+      "total_pnl": 466965.82,
+      "avg_pnl": 44.93,
+      "total_gains": 1005296.90,
+      "total_losses": -538331.08,
+      "median_pnl": -2.76,
+      "p75_pnl": 7.69,
+      "p90_pnl": 146.85,
+      "p99_pnl": 1891.03
+    },
+    {
+      "date": "2026-01-21",
+      "total_wallets": 7770,
+      "big_winners": 996,
+      "small_winners": 2376,
+      "small_losers": 3590,
+      "big_losers": 808,
+      "pct_profitable": 43.4,
+      "total_pnl": 345398.41,
+      "avg_pnl": 44.45,
+      "total_gains": 730863.93,
+      "total_losses": -385465.52,
+      "median_pnl": -1.26,
+      "p75_pnl": 14.93,
+      "p90_pnl": 156.14,
+      "p99_pnl": 1859.66
+    }
+  ],
+  "pnl_categories": {
+    "big_winner_threshold": 100,
+    "small_winner_range": "0 to 100",
+    "small_loser_range": "-100 to 0",
+    "big_loser_threshold": -100
+  },
+  "volume_buckets": {
+    "2026-01-19": [
+      {"bucket": "under_100", "wallet_count": 3684, "bucket_volume": 126482.72},
+      {"bucket": "100_500", "wallet_count": 3292, "bucket_volume": 838088.76},
+      {"bucket": "500_1k", "wallet_count": 1303, "bucket_volume": 934316.72},
+      {"bucket": "1k_5k", "wallet_count": 1923, "bucket_volume": 4187682.32},
+      {"bucket": "5k_10k", "wallet_count": 419, "bucket_volume": 2875275.57},
+      {"bucket": "over_10k", "wallet_count": 237, "bucket_volume": 4471635.08}
+    ],
+    "2026-01-20": [
+      {"bucket": "under_100", "wallet_count": 4215, "bucket_volume": 138231.31},
+      {"bucket": "100_500", "wallet_count": 3107, "bucket_volume": 783104.10},
+      {"bucket": "500_1k", "wallet_count": 1269, "bucket_volume": 890417.77},
+      {"bucket": "1k_5k", "wallet_count": 1543, "bucket_volume": 3262943.18},
+      {"bucket": "5k_10k", "wallet_count": 191, "bucket_volume": 1324785.94},
+      {"bucket": "over_10k", "wallet_count": 68, "bucket_volume": 1205608.63}
+    ],
+    "2026-01-21": [
+      {"bucket": "under_100", "wallet_count": 2920, "bucket_volume": 98437.54},
+      {"bucket": "100_500", "wallet_count": 2437, "bucket_volume": 607803.51},
+      {"bucket": "500_1k", "wallet_count": 923, "bucket_volume": 653244.60},
+      {"bucket": "1k_5k", "wallet_count": 1172, "bucket_volume": 2494421.61},
+      {"bucket": "5k_10k", "wallet_count": 131, "bucket_volume": 877868.67},
+      {"bucket": "over_10k", "wallet_count": 62, "bucket_volume": 1145144.67}
+    ]
+  }
+}

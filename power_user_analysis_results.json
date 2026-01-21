@@ -1,0 +1,193 @@
+{
+  "volume_distribution": {
+    "name": "Total USD Volume (30d)",
+    "count": 10000,
+    "min": 8485.86267,
+    "max": 2664222.30277,
+    "mean": 54479.16184113301,
+    "median": 22886.891775,
+    "std": 108546.44551378617,
+    "percentiles": {
+      "p50": 22886.891775,
+      "p75": 53262.69201,
+      "p90": 119453.24727200014,
+      "p95": 196041.49429149984,
+      "p99": 472735.6510465005
+    }
+  },
+  "swap_distribution": {
+    "name": "Swap Count (30d)",
+    "count": 10000,
+    "min": 2.0,
+    "max": 20538.0,
+    "mean": 475.3416,
+    "median": 227.0,
+    "std": 862.2851867621523,
+    "percentiles": {
+      "p50": 227.0,
+      "p75": 519.0,
+      "p90": 1014.1000000000004,
+      "p95": 1595.0499999999993,
+      "p99": 4237.01
+    }
+  },
+  "avg_size_distribution": {
+    "name": "Avg Swap Size",
+    "count": 10000,
+    "min": 0.6142625606193397,
+    "max": 10269.68742,
+    "mean": 166.46734990690769,
+    "median": 128.36012767248081,
+    "std": 215.51222858708923,
+    "percentiles": {
+      "p50": 128.36012767248081,
+      "p75": 192.98757654057016,
+      "p90": 298.5782551923078,
+      "p95": 407.8448464010694,
+      "p99": 868.7604999000007
+    }
+  },
+  "activity_patterns": {
+    "active_days_distribution": {
+      "name": "Active Days (30d)",
+      "count": 22395,
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 2.232641214556821,
+      "median": 1.0,
+      "std": 1.7162129483902413,
+      "percentiles": {
+        "p50": 1.0,
+        "p75": 3.0,
+        "p90": 5.0,
+        "p95": 6.0,
+        "p99": 8.0
+      }
+    },
+    "avg_daily_volume_distribution": {
+      "name": "Avg Daily Volume",
+      "count": 22395,
+      "min": 0.00138,
+      "max": 106849.18693249999,
+      "mean": 899.4837551009538,
+      "median": 261.58833,
+      "std": 2162.3301578872556,
+      "percentiles": {
+        "p50": 261.58833,
+        "p75": 884.755865,
+        "p90": 2202.166914333336,
+        "p95": 3714.345035899997,
+        "p99": 9449.388094981008
+      }
+    },
+    "active_days_thresholds": {
+      "natural_boundaries": [
+        8.242762925758251
+      ],
+      "percentile_thresholds": {
+        "p50": 1.0,
+        "p75": 3.0,
+        "p90": 5.0,
+        "p95": 6.0,
+        "p99": 8.0
+      }
+    },
+    "daily_volume_thresholds": {
+      "natural_boundaries": [
+        0.002853873848449464,
+        0.005901881118017209,
+        0.0252407251675421,
+        0.05219843874749901,
+        0.15523549884342183
+      ],
+      "percentile_thresholds": {
+        "p50": 261.58833,
+        "p75": 884.755865,
+        "p90": 2202.166914333336,
+        "p95": 3714.345035899997,
+        "p99": 9449.388094981008
+      }
+    }
+  },
+  "volume_elbows": [
+    {
+      "rank": 30,
+      "value": 773663.70662,
+      "percentile": 99.7
+    },
+    {
+      "rank": 40,
+      "value": 707508.23486,
+      "percentile": 99.6
+    },
+    {
+      "rank": 70,
+      "value": 565746.49834,
+      "percentile": 99.3
+    },
+    {
+      "rank": 80,
+      "value": 539296.33077,
+      "percentile": 99.2
+    },
+    {
+      "rank": 100,
+      "value": 472712.72914,
+      "percentile": 99.0
+    }
+  ],
+  "swap_elbows": [
+    {
+      "rank": 20,
+      "value": 8018.0,
+      "percentile": 99.8
+    },
+    {
+      "rank": 30,
+      "value": 7586.0,
+      "percentile": 99.7
+    },
+    {
+      "rank": 70,
+      "value": 4679.0,
+      "percentile": 99.3
+    },
+    {
+      "rank": 80,
+      "value": 4489.0,
+      "percentile": 99.2
+    },
+    {
+      "rank": 90,
+      "value": 4298.0,
+      "percentile": 99.1
+    }
+  ],
+  "recommendations": [
+    {
+      "metric": "Total Volume (30d)",
+      "casual_max": 53262.69201,
+      "power_user_min": 119453.24727200014,
+      "whale_min": 196041.49429149984,
+      "reasoning": "Based on volume distribution percentiles"
+    },
+    {
+      "metric": "Swap Count (30d)",
+      "casual_max": 519.0,
+      "power_user_min": 1014.1000000000004,
+      "reasoning": "Based on activity frequency percentiles"
+    },
+    {
+      "metric": "Active Days (30d)",
+      "casual_max": 3.0,
+      "power_user_min": 5.0,
+      "reasoning": "Based on consistency of engagement"
+    }
+  ],
+  "suggested_thresholds": {
+    "casual_max_volume": 53262.69201,
+    "regular_max_volume": 119453.24727200014,
+    "power_min_volume": 119453.24727200014,
+    "whale_min_volume": 196041.49429149984
+  }
+}

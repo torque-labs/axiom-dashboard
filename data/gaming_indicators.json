@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "campaign": "Axiom/Raydium PNL Leaderboard",
+    "generated_at": "2026-01-21T16:00:00Z"
+  },
+  "rapid_reversals": [
+    {
+      "date": "2026-01-19",
+      "rapid_reversals": 37653,
+      "wallets_with_reversals": 6939,
+      "pct_of_wallets": 63.9
+    },
+    {
+      "date": "2026-01-20",
+      "rapid_reversals": 25389,
+      "wallets_with_reversals": 6479,
+      "pct_of_wallets": 62.3
+    },
+    {
+      "date": "2026-01-21",
+      "rapid_reversals": 13822,
+      "wallets_with_reversals": 4219,
+      "pct_of_wallets": 55.2
+    }
+  ],
+  "volume_dominance": [
+    {
+      "date": "2026-01-19",
+      "wallets_over_50pct": 64,
+      "wallets_over_80pct": 12,
+      "tokens_dominated": 109
+    },
+    {
+      "date": "2026-01-20",
+      "wallets_over_50pct": 34,
+      "wallets_over_80pct": 9,
+      "tokens_dominated": 52
+    },
+    {
+      "date": "2026-01-21",
+      "wallets_over_50pct": 26,
+      "wallets_over_80pct": 10,
+      "tokens_dominated": 29
+    }
+  ],
+  "token_concentration": {
+    "snapshot_date": "2026-01-21",
+    "traders_with_pnl_over_100": 3546,
+    "over_95_pct_single_token": 1354,
+    "over_80_pct_single_token": 1695,
+    "pct_highly_concentrated": 47.8
+  },
+  "flagged_wallets_activity": [
+    {
+      "wallet": "CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o",
+      "risk_level": "Low",
+      "concern": "222 rapid reversals (bot behavior)",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 662, "volume": 129762.78},
+        {"date": "2026-01-20", "trades": 472, "volume": 71884.16},
+        {"date": "2026-01-21", "trades": 170, "volume": 26282.93}
+      ]
+    },
+    {
+      "wallet": "CA4keXLtGJWBcsWivjtMFBghQ8pFsGRWFxLrRCtirzu5",
+      "risk_level": "Critical",
+      "concern": "96% volume dominance, $12,459 gaming PNL",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 37, "volume": 34612.13},
+        {"date": "2026-01-20", "trades": 15, "volume": 10517.04},
+        {"date": "2026-01-21", "trades": 9, "volume": 1498.45}
+      ]
+    },
+    {
+      "wallet": "4NtyFqqRzvHWsTmJZoT26H9xtL7asWGTxpcpCxiKax9a",
+      "risk_level": "High",
+      "concern": "HANRi coordination ring leader",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 45, "volume": 28425.53}
+      ]
+    },
+    {
+      "wallet": "TimeAdRpWxqKXR5YPEwGBF48KC5V5TxB2g6mnyCp4VR",
+      "risk_level": "High",
+      "concern": "HANRi coordination, bought at peak",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 27, "volume": 29948.22},
+        {"date": "2026-01-20", "trades": 36, "volume": 10625.18},
+        {"date": "2026-01-21", "trades": 13, "volume": 4934.10}
+      ]
+    },
+    {
+      "wallet": "29fMnkfzGMzHqocaUM4758rmJz6jb5eskvZnSmG85qQu",
+      "risk_level": "High",
+      "concern": "HANRi coordination, extreme PNL efficiency",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 45, "volume": 5859.65},
+        {"date": "2026-01-20", "trades": 9, "volume": 226.94}
+      ]
+    },
+    {
+      "wallet": "ETvmkav36qmxXViTNzuEc29hjdhnbaMQ9WYJifeH4AhN",
+      "risk_level": "Medium",
+      "concern": "Same-second trades with 5siYF3h8",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 50, "volume": 11754.04},
+        {"date": "2026-01-20", "trades": 37, "volume": 6132.71},
+        {"date": "2026-01-21", "trades": 21, "volume": 5914.00}
+      ]
+    },
+    {
+      "wallet": "5siYF3h8FLK5W9FexFsr4wR6ijS6J3dYb5FMqAQhtnbo",
+      "risk_level": "Medium",
+      "concern": "Same-second trades with ETvmkav3",
+      "daily_activity": [
+        {"date": "2026-01-19", "trades": 37, "volume": 8663.19},
+        {"date": "2026-01-20", "trades": 31, "volume": 4019.92},
+        {"date": "2026-01-21", "trades": 10, "volume": 1918.08}
+      ]
+    }
+  ]
+}

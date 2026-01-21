@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "campaign": "Axiom/Raydium PNL Leaderboard",
+    "generated_at": "2026-01-21T16:00:00Z",
+    "rules": "Original ($1K min volume)"
+  },
+  "top_50": [
+    {"rank": 1, "wallet": "CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o", "pnl": 22674.10, "volume": 225687.84, "tokens": 181, "flags": ["Rapid Reversals (222)", "Bot Behavior"]},
+    {"rank": 2, "wallet": "6pkPgzD8LeNbaiD86DYAQtFHfvCMkiLVscyyi4E5NcyY", "pnl": 19530.54, "volume": 21933.54, "tokens": 2, "flags": ["High Concentration"]},
+    {"rank": 3, "wallet": "CA4keXLtGJWBcsWivjtMFBghQ8pFsGRWFxLrRCtirzu5", "pnl": 13532.47, "volume": 46079.07, "tokens": 13, "flags": ["Volume Dominance (96%)", "Coordination Ring"]},
+    {"rank": 4, "wallet": "4NtyFqqRzvHWsTmJZoT26H9xtL7asWGTxpcpCxiKax9a", "pnl": 11568.40, "volume": 28425.53, "tokens": 4, "flags": ["Token Concentration (105%)", "Coordination Ring"]},
+    {"rank": 5, "wallet": "HYSq1KBAvqWpEv1pCbV31muKM1za5A1WSHGdiVLUoNhb", "pnl": 10807.03, "volume": 87391.05, "tokens": 2, "flags": ["High Concentration"]},
+    {"rank": 6, "wallet": "ExggwHcHhg67jgR6oyUiZxq7RhsYDhSkAeSkN2W9VBHH", "pnl": 10356.27, "volume": 28695.10, "tokens": 4, "flags": []},
+    {"rank": 7, "wallet": "5CWn9gFtdLSKzSELvhPufwqaky73LU9pyW5VQ6xJA7Ye", "pnl": 9724.62, "volume": 29829.20, "tokens": 33, "flags": ["Rapid Reversals (23)"]},
+    {"rank": 8, "wallet": "BTZJRdccNMrF1tdwjSk9K369udDJpk8mxrZNP2U7vAxY", "pnl": 9677.07, "volume": 35000.70, "tokens": 11, "flags": ["Token Concentration (80%)"]},
+    {"rank": 9, "wallet": "JCLqyRAzLy2otp1mUkgaHpJkNRrQ5Xf1hQakn7m1oRQJ", "pnl": 7154.91, "volume": 45217.07, "tokens": 33, "flags": []},
+    {"rank": 10, "wallet": "4QodqLUiQ57XF3W2X6AjYhKW2NGUuVdreGLQJkbWkVa2", "pnl": 6829.49, "volume": 17263.59, "tokens": 3, "flags": []},
+    {"rank": 11, "wallet": "ETvmkav36qmxXViTNzuEc29hjdhnbaMQ9WYJifeH4AhN", "pnl": 6744.97, "volume": 23800.75, "tokens": 14, "flags": ["Coordination Ring"]},
+    {"rank": 12, "wallet": "5B79fMkcFeRTiwm7ehsZsFiKsC7m7n1Bgv9yLxPp9q2X", "pnl": 6561.62, "volume": 42006.22, "tokens": 30, "flags": []},
+    {"rank": 13, "wallet": "FcBdvzv2WkdDaUSbqzRLx1Xbp3rhNmNPM4PtGuoBg9Qy", "pnl": 6111.38, "volume": 24445.72, "tokens": 12, "flags": []},
+    {"rank": 14, "wallet": "TimeAdRpWxqKXR5YPEwGBF48KC5V5TxB2g6mnyCp4VR", "pnl": 5911.48, "volume": 45507.50, "tokens": 14, "flags": ["Token Concentration (102%)", "Coordination Ring"]},
+    {"rank": 15, "wallet": "cfevhbEExWCaAG1gSkNhTCY6iPnLsz3ebJKgT1qUqz4", "pnl": 5493.37, "volume": 24901.94, "tokens": 33, "flags": []},
+    {"rank": 16, "wallet": "FT7P2aR1UQdGfz6NNXDgBH4U4Sr4Nh7anwBDFg1iHXoY", "pnl": 5377.29, "volume": 14366.72, "tokens": 24, "flags": []},
+    {"rank": 17, "wallet": "2p2mgFLmzN82sShZeAaBGmj9zFpam4xu8g4g3wqx2ks6", "pnl": 5339.85, "volume": 17957.51, "tokens": 6, "flags": []},
+    {"rank": 18, "wallet": "5siYF3h8FLK5W9FexFsr4wR6ijS6J3dYb5FMqAQhtnbo", "pnl": 5115.50, "volume": 14601.19, "tokens": 10, "flags": ["Coordination Ring"]},
+    {"rank": 19, "wallet": "29fMnkfzGMzHqocaUM4758rmJz6jb5eskvZnSmG85qQu", "pnl": 4650.15, "volume": 6086.59, "tokens": 3, "flags": ["Coordination Ring", "High Efficiency"]},
+    {"rank": 20, "wallet": "2fg5QD1eD7rzNNCsvnhmXFm5hqNgwTTG8p7kQ6f3rx6f", "pnl": 4644.90, "volume": 86078.23, "tokens": 149, "flags": []},
+    {"rank": 21, "wallet": "EPiapTxAEij66LsPG6Fvzjx9s1hfaU1rRqXiKPuxSwjZ", "pnl": 4577.15, "volume": 24852.52, "tokens": 22, "flags": []},
+    {"rank": 22, "wallet": "GZPYq37cr9Gibj9GV7f686LSZTCKSCJfVy9xTrwahX5W", "pnl": 4539.15, "volume": 6733.50, "tokens": 1, "flags": ["Single Token"]},
+    {"rank": 23, "wallet": "GLuT8cExuCdBKuePZrGuPn41vtpPvDnNqjduin1TgEq7", "pnl": 4270.97, "volume": 16014.26, "tokens": 13, "flags": []},
+    {"rank": 24, "wallet": "Gzi1PgCiDByDGc7DKFYB7iKZCbL8QFJn2NzV3bexVUs4", "pnl": 4241.39, "volume": 22433.56, "tokens": 12, "flags": []},
+    {"rank": 25, "wallet": "6opRaVh5ZDuG9TUdhqm6gZrHHcVQJxXFSFz4zXayCasi", "pnl": 4164.00, "volume": 14000.03, "tokens": 2, "flags": []},
+    {"rank": 26, "wallet": "B3wagQZiZU2hKa5pUCj6rrdhWsX3Q6WfTTnki9PjwzMh", "pnl": 3918.80, "volume": 46783.22, "tokens": 17, "flags": []},
+    {"rank": 27, "wallet": "9LxMdvs1m8QRFvFuhvzzMXykAkpaHTJhktULdpBztUMm", "pnl": 3829.07, "volume": 31137.37, "tokens": 19, "flags": []},
+    {"rank": 28, "wallet": "GBJxfXw7TvLxzb9jZZzcohN1LEydYp73eay69547Pk9p", "pnl": 3777.07, "volume": 20420.55, "tokens": 22, "flags": []},
+    {"rank": 29, "wallet": "BCagckXeMChUKrHEd6fKFA1uiWDtcmCXMsqaheLiUPJd", "pnl": 3692.17, "volume": 29862.82, "tokens": 61, "flags": []},
+    {"rank": 30, "wallet": "J2L495ZPcJ6Btuyd4YqXz5uw7hpKiQXGcLvALwumabED", "pnl": 3602.34, "volume": 57660.77, "tokens": 118, "flags": []},
+    {"rank": 31, "wallet": "JCD21JG4qQJg4oC8mXJ9mJWMF2R7PYA81vZ6CPVaX96H", "pnl": 3594.59, "volume": 29718.31, "tokens": 61, "flags": []},
+    {"rank": 32, "wallet": "AnrR8mHZJuePcsuAEoXp1ugEZMgfjCK5nqE4JJct4KfS", "pnl": 3560.93, "volume": 6888.19, "tokens": 1, "flags": ["Single Token"]},
+    {"rank": 33, "wallet": "FJyFzGMFyJALfd7R9PANSZY7WjPbhV4p6HmsHcp5hPG1", "pnl": 3485.82, "volume": 3732.68, "tokens": 1, "flags": ["Single Token", "High Efficiency"]},
+    {"rank": 34, "wallet": "AGbU8n6PSTbFezgHhHfjdRHYyjpBXP8uwGzVraUNUwZj", "pnl": 3335.63, "volume": 12340.82, "tokens": 2, "flags": []},
+    {"rank": 35, "wallet": "Dgehc8YMv6dHsiPJVoumvq4pSBkMVvrTgTUg7wdcYJPJ", "pnl": 3273.46, "volume": 44372.15, "tokens": 38, "flags": []},
+    {"rank": 36, "wallet": "J2zVGkfkMN6M2WXC8ERXSV2TNx3RYfWpEK8soUYmJK2j", "pnl": 3223.06, "volume": 11734.43, "tokens": 2, "flags": []},
+    {"rank": 37, "wallet": "GrNyJKLqcGwE2tmecq2NUaRf7pPpkdtAe2ggFD45Atnq", "pnl": 3150.55, "volume": 8700.53, "tokens": 5, "flags": []},
+    {"rank": 38, "wallet": "59EEFfq3thxqvMH1mH2538hoGXQAi8fPEc6mYkdugs2s", "pnl": 3004.66, "volume": 29401.72, "tokens": 61, "flags": []},
+    {"rank": 39, "wallet": "5VmT4H2WYwKD1A87U9znDvfUJ7x7dGgKPhzUQgs1i6ND", "pnl": 2998.77, "volume": 5849.98, "tokens": 6, "flags": []},
+    {"rank": 40, "wallet": "7NAd2EpYGGeFofpyvgehSXhH5vg6Ry6VRMW2Y6jiqCu1", "pnl": 2988.97, "volume": 65648.68, "tokens": 145, "flags": []},
+    {"rank": 41, "wallet": "G6yjeomh5NBC765BPDvWdDmyAmfvx687bPqnBVbmEfpr", "pnl": 2965.61, "volume": 8100.74, "tokens": 7, "flags": []},
+    {"rank": 42, "wallet": "BA36AnwpTfKeqNhExVUFFbzUAQTyKYvJrEokKJqVCTPi", "pnl": 2940.29, "volume": 201060.49, "tokens": 71, "flags": []},
+    {"rank": 43, "wallet": "FRa5xvWrvgYBHEukozdhJPCJRuJZcTn2WKj2u6L75Rmj", "pnl": 2938.62, "volume": 7968.90, "tokens": 2, "flags": []},
+    {"rank": 44, "wallet": "6SHgXVvhZn188VKeBHoHtFPPqAyCLioJaetcj84wZcaR", "pnl": 2915.92, "volume": 17777.60, "tokens": 21, "flags": []},
+    {"rank": 45, "wallet": "PMJA8UQDyWTFw2Smhyp9jGA6aTaP7jKHR7BPudrgyYN", "pnl": 2884.98, "volume": 59453.12, "tokens": 119, "flags": []},
+    {"rank": 46, "wallet": "79eMVGwFUS1aVAzDBcPF5tkbW9mJyMuxssaAmRdC71RR", "pnl": 2839.11, "volume": 13046.37, "tokens": 19, "flags": []},
+    {"rank": 47, "wallet": "4rYchPP9facRZyE9mFev8dSLs4ThGGegrtKjgDixgyaU", "pnl": 2716.35, "volume": 24824.96, "tokens": 38, "flags": []},
+    {"rank": 48, "wallet": "1TXsKzewQzFb8MYidNCmvmPWTma1DWyC6fpvd5gQa7W", "pnl": 2638.78, "volume": 7154.74, "tokens": 7, "flags": []},
+    {"rank": 49, "wallet": "4nvNc7dDEqKKLM4Sr9Kgk3t1of6f8G66kT64VoC95LYh", "pnl": 2622.72, "volume": 12574.71, "tokens": 13, "flags": []},
+    {"rank": 50, "wallet": "FVR1vbzxM39eKgLev6iTEYyecBSkzvwEovPutzNhBg7v", "pnl": 2494.07, "volume": 15095.02, "tokens": 6, "flags": []}
+  ],
+  "leaderboard_changes_since_report": {
+    "new_entrants_top_10": [
+      {"wallet": "6pkPgzD8LeNbaiD86DYAQtFHfvCMkiLVscyyi4E5NcyY", "new_rank": 2, "pnl": 19530.54},
+      {"wallet": "HYSq1KBAvqWpEv1pCbV31muKM1za5A1WSHGdiVLUoNhb", "new_rank": 5, "pnl": 10807.03},
+      {"wallet": "ExggwHcHhg67jgR6oyUiZxq7RhsYDhSkAeSkN2W9VBHH", "new_rank": 6, "pnl": 10356.27},
+      {"wallet": "JCLqyRAzLy2otp1mUkgaHpJkNRrQ5Xf1hQakn7m1oRQJ", "new_rank": 9, "pnl": 7154.91},
+      {"wallet": "4QodqLUiQ57XF3W2X6AjYhKW2NGUuVdreGLQJkbWkVa2", "new_rank": 10, "pnl": 6829.49}
+    ],
+    "dropped_from_top_10": [
+      {"wallet": "FT7P2aR1...", "old_rank": 9, "new_rank": 16},
+      {"wallet": "29fMnkfz...", "old_rank": 10, "new_rank": 19}
+    ]
+  }
+}
