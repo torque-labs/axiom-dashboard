@@ -607,12 +607,12 @@ function generateHTML(data) {
               <div class="result-values"><span class="result-before">2</span><span class="result-arrow-small">→</span><span class="result-after success">0</span></div>
             </div>
             <div class="result-row">
-              <span class="result-label">Flagged PnL</span>
-              <span class="result-change success">-88%</span>
+              <span class="result-label">Flagged Wallets</span>
+              <span class="result-wallet">CyaE1V... (#1), 5CWn9g... (#7)</span>
             </div>
             <div class="result-row">
-              <span class="result-label">Legitimate Traders</span>
-              <span class="result-change success">+9% avg</span>
+              <span class="result-label">Flagged PnL</span>
+              <span class="result-change success">-88%</span>
             </div>
             <div class="result-row">
               <span class="result-label">New #1</span>
