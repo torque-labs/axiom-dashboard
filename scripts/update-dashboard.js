@@ -206,6 +206,26 @@ function generateHTML(data) {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
   <style>
+    /* Password Protection Styles */
+    .password-overlay { position: fixed; inset: 0; background: linear-gradient(135deg, #18181b 0%, #27272a 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .password-overlay.hidden { display: none; }
+    .password-box { background: #27272a; border: 1px solid rgba(97, 102, 245, 0.3); border-radius: 20px; padding: 48px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 80px rgba(97, 102, 245, 0.15); }
+    .password-logo { margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .password-logo svg { width: 40px; height: 40px; }
+    .password-logo-sep { font-size: 24px; color: #52525b; font-weight: 300; }
+    .password-title { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 600; color: #fafafa; margin-bottom: 8px; }
+    .password-subtitle { font-family: 'Inter', sans-serif; font-size: 14px; color: #71717a; margin-bottom: 32px; }
+    .password-input-wrap { position: relative; margin-bottom: 16px; }
+    .password-input { width: 100%; padding: 14px 18px; font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #18181b; border: 1px solid #3f3f46; border-radius: 10px; color: #fafafa; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .password-input:focus { border-color: #6166f5; box-shadow: 0 0 0 3px rgba(97, 102, 245, 0.2); }
+    .password-input::placeholder { color: #52525b; }
+    .password-btn { width: 100%; padding: 14px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; background: linear-gradient(135deg, #6166f5 0%, #4f46e5 100%); border: none; border-radius: 10px; color: #fff; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+    .password-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 25px -5px rgba(97, 102, 245, 0.4); }
+    .password-btn:active { transform: translateY(0); }
+    .password-error { font-family: 'Inter', sans-serif; font-size: 13px; color: #ef4444; margin-top: 16px; opacity: 0; transition: opacity 0.2s; }
+    .password-error.show { opacity: 1; }
+    .dashboard { display: none; }
+    .dashboard.visible { display: block; }
     :root {
       --bg-primary: #fafafa; --bg-secondary: #f4f4f5; --bg-card: #ffffff; --bg-elevated: #f4f4f5;
       --text-primary: #18181b; --text-secondary: #52525b; --text-muted: #a1a1aa;
@@ -336,7 +356,27 @@ function generateHTML(data) {
   </style>
 </head>
 <body>
-  <div class="dashboard">
+  <div class="password-overlay" id="passwordOverlay">
+    <div class="password-box">
+      <div class="password-logo">
+        <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.5871 2H9.41337C8.48752 2 7.63199 2.49394 7.16906 3.29577L0.58254 14.7041C0.119628 15.5059 0.119621 16.4937 0.582525 17.2955L7.16907 28.7042C7.63199 29.506 8.48752 30 9.4134 30H22.5871C23.513 30 24.3685 29.506 24.8314 28.7042L31.418 17.2955C31.8809 16.4937 31.8809 15.5059 31.4179 14.7041L24.8314 3.29577C24.3685 2.49395 23.513 2 22.5871 2ZM17.6833 16.9716H29.3608L23.5223 27.0847L17.6833 16.9716ZM29.3608 15.0281H18.0574C17.1315 15.0281 16.276 14.5341 15.8131 13.7323L10.1613 3.94352H21.465C22.3909 3.94352 23.2464 4.43746 23.7093 5.23929L29.3608 15.0281ZM14.317 15.0281H2.63966L8.47822 4.91526L14.317 15.0281ZM2.63964 16.9716H13.9429C14.8688 16.9716 15.7243 17.4655 16.1872 18.2673L21.8391 28.0565H10.5355C9.6096 28.0565 8.75407 27.5625 8.29115 26.7607L2.63964 16.9716Z" fill="#6166f5"/>
+        </svg>
+        <span class="password-logo-sep">×</span>
+        <svg fill="none" height="40" viewBox="0 0 29 33" width="35" xmlns="http://www.w3.org/2000/svg"><linearGradient id="raydium-grad-pw" gradientUnits="userSpaceOnUse" x1="28.3168" x2="-1.73336" y1="8.19162" y2="20.2086"><stop offset="0" stop-color="#c200fb"/><stop offset=".489658" stop-color="#3772ff"/><stop offset=".489758" stop-color="#3773fe"/><stop offset="1" stop-color="#5ac4be"/></linearGradient><g fill="url(#raydium-grad-pw)"><path d="m26.8625 12.281v11.4104l-12.6916 7.3261-12.69859-7.3261v-14.65937l12.69859-7.33322 9.7541 5.63441 1.4723-.84941-11.2264-6.48381-14.1709 8.18262v16.35818l14.1709 8.1826 14.171-8.1826v-13.1092z"/><path d="m10.6176 23.6985h-2.12353v-7.1209h7.07843c.6697-.0074 1.3095-.2782 1.7811-.7538.4716-.4755.737-1.1176.7388-1.7874.0038-.3311-.0601-.6596-.1879-.9651-.1279-.3056-.3168-.5817-.5554-.8115-.2308-.2372-.5071-.4253-.8124-.553-.3053-.1278-.6333-.1925-.9642-.1903h-7.07843v-2.16595h7.08543c1.2405.00743 2.4281.50351 3.3053 1.38065.8771.8772 1.3732 2.0648 1.3806 3.3052.0076.9496-.2819 1.8777-.8281 2.6544-.5027.7432-1.2111 1.3237-2.0386 1.6705-.8194.2599-1.6745.3889-2.5341.3823h-4.247z"/><path d="m20.2159 23.5215h-2.4775l-1.9111-3.3339c.7561-.0463 1.5019-.1988 2.2155-.453z"/><path d="m25.3831 9.90975 1.4652.81405 1.4653-.81405v-1.72005l-1.4653-.84941-1.4652.84941z"/></g></svg>
+      </div>
+      <h2 class="password-title">Trading Competition Dashboard</h2>
+      <p class="password-subtitle">Enter password to access</p>
+      <form id="passwordForm">
+        <div class="password-input-wrap">
+          <input type="password" class="password-input" id="passwordInput" placeholder="Enter password" autocomplete="off" autofocus>
+        </div>
+        <button type="submit" class="password-btn">Access Dashboard</button>
+      </form>
+      <p class="password-error" id="passwordError">Incorrect password. Please try again.</p>
+    </div>
+  </div>
+  <div class="dashboard" id="dashboard">
     <header class="header">
       <div class="header-left">
         <div class="logo">
@@ -574,6 +614,53 @@ function generateHTML(data) {
         type: 'bar', data: { labels, datasets: [{ data: usersData, backgroundColor: bgColors(usersData), borderColor: brColors(usersData), borderWidth: 1, borderRadius: 4 }] },
         options: { ...opts, plugins: { ...opts.plugins, tooltip: { ...opts.plugins.tooltip, callbacks: { label: (c) => c.raw.toFixed(2) + 'K users' } }, annotation: { annotations: annot(bUsersAvg, '${(bUsers / 1000).toFixed(1)}K') } } }
       });
+    });
+
+    // Password Protection
+    const PASS_HASH = '${Buffer.from('bonk_ray_26').toString('base64')}';
+    const COOKIE_NAME = 'trq_dash_auth';
+    const COOKIE_DAYS = 30;
+
+    function getCookie(name) {
+      const v = document.cookie.match('(^|;)\\\\s*' + name + '\\\\s*=\\\\s*([^;]+)');
+      return v ? v.pop() : '';
+    }
+
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Strict';
+    }
+
+    function checkAuth() {
+      return getCookie(COOKIE_NAME) === PASS_HASH;
+    }
+
+    function showDashboard() {
+      document.getElementById('passwordOverlay').classList.add('hidden');
+      document.getElementById('dashboard').classList.add('visible');
+    }
+
+    if (checkAuth()) {
+      showDashboard();
+    }
+
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('passwordInput').value;
+      const inputHash = btoa(input);
+      if (inputHash === PASS_HASH) {
+        setCookie(COOKIE_NAME, PASS_HASH, COOKIE_DAYS);
+        showDashboard();
+      } else {
+        document.getElementById('passwordError').classList.add('show');
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
+    });
+
+    document.getElementById('passwordInput').addEventListener('input', function() {
+      document.getElementById('passwordError').classList.remove('show');
     });
   </script>
 </body>
