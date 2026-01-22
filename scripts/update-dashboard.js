@@ -10,7 +10,7 @@ const QUOTE_TOKEN = 'USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB';
 const BASELINE_START = '2026-01-12';
 const BASELINE_END = '2026-01-19';  // exclusive
 const COMP_START = '2026-01-19';
-const COMP_END = '2026-01-23';      // exclusive (Jan 22 is last day)
+const COMP_END = '2026-01-22';      // exclusive (Jan 21 is last day)
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -131,7 +131,7 @@ function generateHTML(data) {
   const userData = dailyData.map(d => (Number(d.users) / 1000).toFixed(2));
 
   const compEndDay = new Date(COMP_END);
-  compEndDay.setUTCDate(compEndDay.getUTCDate() - 1);
+  compEndDay.setDate(compEndDay.getDate() - 1);
   const compDaysCount = compDays.length;
   const timestamp = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 
@@ -457,7 +457,7 @@ function generateHTML(data) {
         <div class="header-divider"></div>
         <div class="header-title">
           <h1>Trading Competition Analysis</h1>
-          <div class="period">Competition: Jan 19–${compEndDay.getUTCDate()} · Baseline: Jan 12–18</div>
+          <div class="period">Competition: Jan 19–${compEndDay.getDate()} · Baseline: Jan 12–18</div>
         </div>
       </div>
     </header>
@@ -625,7 +625,7 @@ function generateHTML(data) {
     </div>
 
     <footer class="footer">
-      <div class="timestamp">Updated ${timestamp} · Data: Jan 19–${compEndDay.getUTCDate()} (${compDaysCount} days)</div>
+      <div class="timestamp">Updated ${timestamp} · Data: Jan 19–${compEndDay.getDate()} (${compDaysCount} days)</div>
     </footer>
   </div>
 
