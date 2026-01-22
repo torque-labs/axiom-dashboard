@@ -685,7 +685,7 @@ function generateHTML(data) {
     });
 
     // Password Protection
-    const PASS_HASH = '${Buffer.from('bonk_ray_26').toString('base64')}';
+    const PASS_HASH = '${Buffer.from('ray_torque_26').toString('base64')}';
     const COOKIE_NAME = 'trq_dash_auth';
     const COOKIE_DAYS = 30;
 
