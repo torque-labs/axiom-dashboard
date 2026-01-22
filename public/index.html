@@ -157,6 +157,74 @@
     .card:nth-child(1) { animation-delay: 0.35s; } .card:nth-child(2) { animation-delay: 0.4s; } .card:nth-child(3) { animation-delay: 0.45s; }
     .integrity-panel { animation-delay: 0.5s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* Mobile Responsive */
+    @media (max-width: 1200px) {
+      .content-grid { grid-template-columns: 1fr 1fr; }
+      .content-grid .card:nth-child(2) { grid-column: 1 / -1; }
+      .integrity-content { grid-template-columns: 1fr; gap: 12px; }
+      .integrity-arrow { transform: rotate(90deg); padding: 8px 0; }
+    }
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .header-title h1 { font-size: 16px; }
+      .metrics-grid { grid-template-columns: 1fr; gap: 12px; }
+      .metric-card { padding: 16px 20px; }
+      .metric-value { font-size: 28px; }
+      .metric-delta { font-size: 12px; }
+      .charts-section { grid-template-columns: 1fr; gap: 12px; }
+      .chart-card { padding: 16px; }
+      .chart-container { height: 140px; }
+      .content-grid { grid-template-columns: 1fr; gap: 16px; }
+      .content-grid .card:nth-child(2) { grid-column: auto; }
+      .card { padding: 16px; }
+      .leaderboard { overflow-x: auto; }
+      .leader-header, .leader-row { grid-template-columns: 24px 1fr 50px 50px 45px 55px; gap: 4px; padding: 8px; font-size: 10px; min-width: 360px; }
+      .leader-wallet { font-size: 10px; }
+      .leader-stats { font-size: 9px; }
+      .leader-badge { font-size: 8px; padding: 2px 4px; }
+      .leader-efficiency, .leader-volume { font-size: 10px; }
+      .leader-pnl { font-size: 11px; }
+      .integrity-panel { padding: 16px; }
+      .integrity-header { flex-direction: column; gap: 12px; }
+      .integrity-filters-display { flex-direction: column; gap: 8px; }
+      .filter-item { padding: 10px; }
+      .filter-value { font-size: 14px; }
+      .password-box { padding: 32px 24px; margin: 16px; }
+      .password-title { font-size: 18px; }
+    }
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .header-left { flex-wrap: wrap; gap: 8px; }
+      .logo svg { width: 24px; height: 24px; }
+      .logo-separator { font-size: 14px; }
+      .header-divider { display: none; }
+      .header-title h1 { font-size: 14px; }
+      .header-title .period { font-size: 10px; }
+      .metric-value { font-size: 24px; }
+      .metric-label { font-size: 10px; }
+      .chart-legend { gap: 12px; font-size: 10px; }
+      .card-title { font-size: 11px; }
+      .segment-name { font-size: 12px; }
+      .segment-value { font-size: 13px; }
+      .user-stat-label { font-size: 11px; }
+      .user-stat-value { font-size: 12px; }
+      .vol-leader-wallet { font-size: 11px; }
+      .vol-leader-value { font-size: 12px; }
+      .overlap-note p { font-size: 11px; }
+      .integrity-header-left h3 { font-size: 14px; }
+      .integrity-subtitle { font-size: 12px; }
+      .integrity-card { padding: 14px; }
+      .integrity-card-header { font-size: 10px; }
+      .tested-group-title { font-size: 10px; }
+      .tested-tag { font-size: 10px; padding: 4px 8px; }
+      .result-label { font-size: 11px; }
+      .result-values { font-size: 12px; }
+      .result-change { font-size: 12px; }
+      .integrity-card-note { font-size: 11px; }
+      .timestamp { font-size: 10px; }
+    }
   </style>
 </head>
 <body>
