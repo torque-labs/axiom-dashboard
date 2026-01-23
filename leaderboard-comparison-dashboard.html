@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard Gaming Analysis Dashboard</title>
+    <title>Leaderboard Anti-Gaming Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         :root {
@@ -17,6 +17,7 @@
             --blue: #1d9bf0;
             --purple: #7c3aed;
             --yellow: #fbbf24;
+            --orange: #f97316;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,7 +27,7 @@
             padding: 24px;
             line-height: 1.5;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
 
         h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
         .subtitle { color: var(--text-secondary); margin-bottom: 32px; }
@@ -88,6 +89,15 @@
             width: 100%;
         }
 
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -111,8 +121,8 @@
             font-family: 'SF Mono', Monaco, monospace;
             font-size: 13px;
         }
-        .wallet-cell.sniper { color: var(--red); }
-        .wallet-cell.stable { color: var(--blue); }
+        .wallet-cell.suspect { color: var(--orange); }
+        .wallet-cell.legit { color: var(--blue); }
 
         .num {
             text-align: right;
@@ -129,8 +139,8 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        .badge.sniper { background: rgba(244,33,46,0.15); color: var(--red); }
-        .badge.stable { background: rgba(0,186,124,0.15); color: var(--green); }
+        .badge.suspect { background: rgba(249,115,22,0.15); color: var(--orange); }
+        .badge.legit { background: rgba(0,186,124,0.15); color: var(--green); }
 
         .change {
             font-size: 11px;
@@ -157,51 +167,102 @@
             height: 14px;
             border-radius: 4px;
         }
+
+        .suspicious-activity {
+            background: rgba(249,115,22,0.1);
+            border: 1px solid var(--orange);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .suspicious-activity strong { color: var(--orange); }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Leaderboard Gaming Analysis</h1>
+        <h1>Leaderboard Anti-Gaming Analysis</h1>
         <p class="subtitle">Analysis Period: January 19-25, 2026</p>
 
         <div class="recommendation">
-            <h2>Recommendation: 30-Minute Hold + 10 Unique Traders</h2>
-            <p>This combination removes all identified snipers while preserving legitimate trader rankings. Sniper PNL reduced by 93%, stable traders see minimal impact (+2% average).</p>
+            <h2>Recommendation: 15-Minute Hold | $2,000 Volume | 10 Unique Traders</h2>
+            <p>This configuration reduces suspected gaming PNL by 88% while preserving legitimate trader rankings. Legitimate traders see an average +9% improvement due to removal of gaming activity.</p>
         </div>
 
         <div class="metrics">
             <div class="metric">
-                <div class="metric-label">Snipers Found</div>
+                <div class="metric-label">Suspected Gaming Wallets</div>
                 <div class="metric-value">3</div>
             </div>
             <div class="metric">
-                <div class="metric-label">Gaming PNL</div>
+                <div class="metric-label">Suspected Gaming PNL</div>
                 <div class="metric-value red">$54.3k</div>
             </div>
             <div class="metric">
-                <div class="metric-label">Sniper Reduction</div>
-                <div class="metric-value red">-93%</div>
+                <div class="metric-label">PNL Reduction</div>
+                <div class="metric-value red">-88%</div>
             </div>
             <div class="metric">
-                <div class="metric-label">Stable Impact</div>
-                <div class="metric-value green">+2%</div>
+                <div class="metric-label">Legit Trader Impact</div>
+                <div class="metric-value green">+9%</div>
             </div>
         </div>
 
         <div class="section">
-            <div class="section-title">Sniper vs Stable Trader Impact</div>
+            <div class="section-title">Suspicious Activity Identified</div>
+            <div class="suspicious-activity">
+                <strong>5CWn9gFt ↔ JCLqyRAz:</strong> 39 shared tokens, 373 trades, avg 0.1 seconds apart<br>
+                <strong>CyaE1Vxv ↔ JCLqyRAz:</strong> 14 shared tokens, 10 within 5 minutes<br>
+                <strong>CyaE1Vxv ↔ 5CWn9gFt:</strong> 14 shared tokens, 10 within 5 minutes<br><br>
+                <em>Pattern consistent with bot behavior, though coordination cannot be confirmed.</em>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="section">
+                <div class="section-title">Current Leaderboard (No Filters)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Wallet</th>
+                            <th class="num">PNL</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="currentTable"></tbody>
+                </table>
+            </div>
+            <div class="section">
+                <div class="section-title">New Leaderboard (15m / $2k / 10T)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Wallet</th>
+                            <th class="num">PNL</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Suspected Gaming vs Legitimate Trader Impact</div>
             <div class="chart-wrapper">
                 <canvas id="impactChart"></canvas>
             </div>
         </div>
 
         <div class="section">
-            <div class="section-title">PNL by Scenario (Top 10 Wallets)</div>
+            <div class="section-title">Scenarios Tested</div>
             <div class="legend">
-                <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> Current</div>
-                <div class="legend-item"><div class="legend-dot" style="background: var(--yellow)"></div> 30min Hold</div>
-                <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> 30m + 10T</div>
-                <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> Combined</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> Baseline</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--yellow)"></div> 15m/$2k/10T</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> 15m/$2k/20T</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> 20m/$3k/30T</div>
             </div>
             <div class="chart-wrapper">
                 <canvas id="scenarioChart"></canvas>
@@ -209,85 +270,149 @@
         </div>
 
         <div class="section">
-            <div class="section-title">Detailed Wallet Analysis</div>
+            <div class="section-title">Impact on Suspected Gaming Wallets</div>
             <table>
                 <thead>
                     <tr>
                         <th>Wallet</th>
-                        <th>Status</th>
-                        <th class="num">Current</th>
-                        <th class="num">30min</th>
-                        <th class="num">30m+10T</th>
-                        <th class="num">Combined</th>
-                        <th class="num">Change</th>
+                        <th class="num">Baseline PNL</th>
+                        <th class="num">After Filters</th>
+                        <th class="num">Reduction</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody"></tbody>
+                <tbody id="sniperTable"></tbody>
             </table>
         </div>
     </div>
 
     <script>
-        const data = [
-            { wallet: "CyaE1Vxv", current: 37371, hold_30m: 6332, hold_30m_10t: 6332, combined: 3587, status: "sniper" },
-            { wallet: "6pkPgzD8", current: 18228, hold_30m: 19590, hold_30m_10t: 19590, combined: 19590, status: "normal" },
-            { wallet: "CA4keXLt", current: 13903, hold_30m: 11751, hold_30m_10t: 11751, combined: 11751, status: "normal" },
-            { wallet: "4NtyFqqR", current: 11568, hold_30m: 11197, hold_30m_10t: 11197, combined: 5339, status: "normal" },
-            { wallet: "ExggwHcH", current: 10356, hold_30m: 10356, hold_30m_10t: 10356, combined: 10238, status: "normal" },
-            { wallet: "5CWn9gFt", current: 9812, hold_30m: 134, hold_30m_10t: 134, combined: 100, status: "sniper" },
-            { wallet: "HYSq1KBA", current: 9746, hold_30m: 10807, hold_30m_10t: 10807, combined: 10807, status: "normal" },
-            { wallet: "BTZJRdcc", current: 9353, hold_30m: 9176, hold_30m_10t: 9176, combined: 9193, status: "normal" },
-            { wallet: "TimeAdRp", current: 8442, hold_30m: 11566, hold_30m_10t: 11566, combined: 5726, status: "normal" },
-            { wallet: "4QodqLUi", current: 7894, hold_30m: 7985, hold_30m_10t: 7985, combined: 7985, status: "normal" },
-            { wallet: "JCLqyRAz", current: 7165, hold_30m: 75, hold_30m_10t: 75, combined: 37, status: "sniper" },
-            { wallet: "8pKVAVuG", current: 6674, hold_30m: 6745, hold_30m_10t: 6745, combined: 5218, status: "normal" },
-            { wallet: "5B79fMkc", current: 6562, hold_30m: 6970, hold_30m_10t: 6970, combined: 6460, status: "normal" },
-            { wallet: "FcBdvzv2", current: 6111, hold_30m: 6451, hold_30m_10t: 6451, combined: 5568, status: "normal" }
+        // Current leaderboard (baseline)
+        const currentData = [
+            { rank: 1, wallet: "CyaE1Vxv", pnl: 37345, status: "suspect" },
+            { rank: 2, wallet: "6pkPgzD8", pnl: 18229, status: "legit" },
+            { rank: 3, wallet: "CA4keXLt", pnl: 13922, status: "legit" },
+            { rank: 4, wallet: "HYSq1KBA", pnl: 11942, status: "legit" },
+            { rank: 5, wallet: "4NtyFqqR", pnl: 11568, status: "legit" },
+            { rank: 6, wallet: "ExggwHcH", pnl: 10356, status: "legit" },
+            { rank: 7, wallet: "5CWn9gFt", pnl: 9767, status: "suspect" },
+            { rank: 8, wallet: "BTZJRdcc", pnl: 9326, status: "legit" },
+            { rank: 9, wallet: "TimeAdRp", pnl: 8442, status: "legit" },
+            { rank: 10, wallet: "4QodqLUi", pnl: 7894, status: "legit" }
+        ];
+
+        // New leaderboard (15m / $2k / 10T)
+        const newData = [
+            { rank: 1, wallet: "6pkPgzD8", pnl: 19327, prevRank: 2 },
+            { rank: 2, wallet: "HYSq1KBA", pnl: 13009, prevRank: 4 },
+            { rank: 3, wallet: "CA4keXLt", pnl: 11751, prevRank: 3 },
+            { rank: 4, wallet: "TimeAdRp", pnl: 11566, prevRank: 9 },
+            { rank: 5, wallet: "4NtyFqqR", pnl: 11197, prevRank: 5 },
+            { rank: 6, wallet: "ExggwHcH", pnl: 10356, prevRank: 6 },
+            { rank: 7, wallet: "BTZJRdcc", pnl: 9306, prevRank: 8 },
+            { rank: 8, wallet: "4QodqLUi", pnl: 7985, prevRank: 10 },
+            { rank: 9, wallet: "5B79fMkc", pnl: 6970, prevRank: null },
+            { rank: 10, wallet: "8pKVAVuG", pnl: 6745, prevRank: null }
+        ];
+
+        // Suspected gaming wallets
+        const sniperData = [
+            { wallet: "CyaE1Vxv", baseline: 37345, after: 6549, reduction: -82 },
+            { wallet: "5CWn9gFt", baseline: 9767, after: 134, reduction: -99 },
+            { wallet: "JCLqyRAz", baseline: 7195, after: 75, reduction: -99 }
+        ];
+
+        // Scenario comparison data
+        const scenarioData = [
+            { wallet: "CyaE1Vxv", baseline: 37345, s15_2k_10t: 6549, s15_2k_20t: 6549, s20_3k_30t: 6332 },
+            { wallet: "6pkPgzD8", baseline: 18229, s15_2k_10t: 19327, s15_2k_20t: 19327, s20_3k_30t: 19327 },
+            { wallet: "HYSq1KBA", baseline: 11942, s15_2k_10t: 13009, s15_2k_20t: 13009, s20_3k_30t: 13009 },
+            { wallet: "5CWn9gFt", baseline: 9767, s15_2k_10t: 134, s15_2k_20t: 134, s20_3k_30t: 134 },
+            { wallet: "JCLqyRAz", baseline: 7195, s15_2k_10t: 75, s15_2k_20t: 75, s20_3k_30t: 75 }
         ];
 
         // Format currency
         const fmt = (n) => '$' + n.toLocaleString();
         const fmtK = (n) => '$' + (n/1000).toFixed(0) + 'k';
 
-        // Populate table
-        const tbody = document.getElementById('tableBody');
-        data.forEach(row => {
-            const change = ((row.combined - row.current) / row.current * 100).toFixed(0);
-            const isSniper = row.status === 'sniper';
-            const isDrop = row.combined < row.current * 0.5;
-
-            tbody.innerHTML += `
+        // Populate current leaderboard
+        const currentTable = document.getElementById('currentTable');
+        currentData.forEach(row => {
+            const isSuspect = row.status === 'suspect';
+            currentTable.innerHTML += `
                 <tr>
-                    <td class="wallet-cell ${isSniper ? 'sniper' : 'stable'}">${row.wallet}...</td>
-                    <td><span class="badge ${isSniper ? 'sniper' : 'stable'}">${isSniper ? 'Sniper' : 'Stable'}</span></td>
-                    <td class="num">${fmt(row.current)}</td>
-                    <td class="num ${isDrop ? 'drop' : ''}">${fmt(row.hold_30m)}</td>
-                    <td class="num ${isDrop ? 'drop' : ''}">${fmt(row.hold_30m_10t)}</td>
-                    <td class="num ${isDrop ? 'drop' : ''}">${fmt(row.combined)}</td>
-                    <td class="num"><span class="change ${change >= 0 ? 'positive' : 'negative'}">${change >= 0 ? '+' : ''}${change}%</span></td>
+                    <td>${row.rank}</td>
+                    <td class="wallet-cell ${isSuspect ? 'suspect' : 'legit'}">${row.wallet}...</td>
+                    <td class="num">${fmt(row.pnl)}</td>
+                    <td><span class="badge ${isSuspect ? 'suspect' : 'legit'}">${isSuspect ? 'Suspect' : 'Legit'}</span></td>
                 </tr>
             `;
         });
+
+        // Populate new leaderboard
+        const newTable = document.getElementById('newTable');
+        newData.forEach(row => {
+            let change = '';
+            if (row.prevRank === null) {
+                change = '<span class="change positive">NEW</span>';
+            } else if (row.prevRank > row.rank) {
+                change = `<span class="change positive">↑ from #${row.prevRank}</span>`;
+            } else if (row.prevRank < row.rank) {
+                change = `<span class="change negative">↓ from #${row.prevRank}</span>`;
+            } else {
+                change = '—';
+            }
+            newTable.innerHTML += `
+                <tr>
+                    <td>${row.rank}</td>
+                    <td class="wallet-cell legit">${row.wallet}...</td>
+                    <td class="num">${fmt(row.pnl)}</td>
+                    <td>${change}</td>
+                </tr>
+            `;
+        });
+
+        // Populate sniper impact table
+        const sniperTable = document.getElementById('sniperTable');
+        sniperData.forEach(row => {
+            sniperTable.innerHTML += `
+                <tr>
+                    <td class="wallet-cell suspect">${row.wallet}...</td>
+                    <td class="num">${fmt(row.baseline)}</td>
+                    <td class="num drop">${fmt(row.after)}</td>
+                    <td class="num drop">${row.reduction}%</td>
+                </tr>
+            `;
+        });
+        // Add total row
+        const totalBaseline = sniperData.reduce((s, d) => s + d.baseline, 0);
+        const totalAfter = sniperData.reduce((s, d) => s + d.after, 0);
+        const totalReduction = Math.round((totalAfter - totalBaseline) / totalBaseline * 100);
+        sniperTable.innerHTML += `
+            <tr style="font-weight: bold; border-top: 2px solid var(--border);">
+                <td>TOTAL</td>
+                <td class="num">${fmt(totalBaseline)}</td>
+                <td class="num drop">${fmt(totalAfter)}</td>
+                <td class="num drop">${totalReduction}%</td>
+            </tr>
+        `;
 
         // Chart defaults
         Chart.defaults.color = '#71767b';
         Chart.defaults.borderColor = '#2f3336';
 
         // Impact Chart
-        const snipers = data.filter(d => d.status === 'sniper');
-        const stable = data.filter(d => d.status === 'normal');
-        const sniperBefore = snipers.reduce((s, d) => s + d.current, 0);
-        const sniperAfter = snipers.reduce((s, d) => s + d.combined, 0);
-        const stableBefore = stable.reduce((s, d) => s + d.current, 0);
-        const stableAfter = stable.reduce((s, d) => s + d.combined, 0);
+        const suspectBefore = sniperData.reduce((s, d) => s + d.baseline, 0);
+        const suspectAfter = sniperData.reduce((s, d) => s + d.after, 0);
+        const legitBefore = currentData.filter(d => d.status === 'legit').reduce((s, d) => s + d.pnl, 0);
+        const legitAfter = newData.slice(0, 8).reduce((s, d) => s + d.pnl, 0); // top 8 legit
 
         new Chart(document.getElementById('impactChart'), {
             type: 'bar',
             data: {
-                labels: ['Snipers (3 wallets)', 'Stable Traders (11 wallets)'],
+                labels: ['Suspected Gaming (3 wallets)', 'Legitimate Traders (Top 8)'],
                 datasets: [
-                    { label: 'Before', data: [sniperBefore, stableBefore], backgroundColor: '#f4212e', borderRadius: 6 },
-                    { label: 'After Rules', data: [sniperAfter, stableAfter], backgroundColor: '#00ba7c', borderRadius: 6 }
+                    { label: 'Before Filters', data: [suspectBefore, legitBefore], backgroundColor: '#f4212e', borderRadius: 6 },
+                    { label: 'After Filters', data: [suspectAfter, legitAfter], backgroundColor: '#00ba7c', borderRadius: 6 }
                 ]
             },
             options: {
@@ -307,24 +432,23 @@
             }
         });
 
-        // Scenario Chart (top 10 only)
-        const top10 = data.slice(0, 10);
+        // Scenario Chart
         new Chart(document.getElementById('scenarioChart'), {
             type: 'bar',
             data: {
-                labels: top10.map(d => d.wallet),
+                labels: scenarioData.map(d => d.wallet),
                 datasets: [
-                    { label: 'Current', data: top10.map(d => d.current), backgroundColor: '#f4212e', borderRadius: 4 },
-                    { label: '30min', data: top10.map(d => d.hold_30m), backgroundColor: '#fbbf24', borderRadius: 4 },
-                    { label: '30m+10T', data: top10.map(d => d.hold_30m_10t), backgroundColor: '#00ba7c', borderRadius: 4 },
-                    { label: 'Combined', data: top10.map(d => d.combined), backgroundColor: '#7c3aed', borderRadius: 4 }
+                    { label: 'Baseline', data: scenarioData.map(d => d.baseline), backgroundColor: '#f4212e', borderRadius: 4 },
+                    { label: '15m/$2k/10T', data: scenarioData.map(d => d.s15_2k_10t), backgroundColor: '#fbbf24', borderRadius: 4 },
+                    { label: '15m/$2k/20T', data: scenarioData.map(d => d.s15_2k_20t), backgroundColor: '#00ba7c', borderRadius: 4 },
+                    { label: '20m/$3k/30T', data: scenarioData.map(d => d.s20_3k_30t), backgroundColor: '#7c3aed', borderRadius: 4 }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true } }
                 },
                 scales: {
                     x: { grid: { display: false } },

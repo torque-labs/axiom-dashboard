@@ -10,7 +10,7 @@ const QUOTE_TOKEN = 'USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB';
 const BASELINE_START = '2026-01-12';
 const BASELINE_END = '2026-01-19';  // exclusive
 const COMP_START = '2026-01-19';
-const COMP_END = '2026-01-22';      // exclusive (Jan 21 is last day)
+const COMP_END = '2026-01-23';      // exclusive (Jan 22 is last day)
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -36,7 +36,7 @@ const pctChange = (comp, base) => Math.round(((comp - base) / base) * 100);
 async function fetchAllData() {
   console.log('Fetching data...');
 
-  const [dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders] = await Promise.all([
+  const [dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders, programBreakdown] = await Promise.all([
     // Daily breakdown
     query(`
       SELECT DATE("receivedAt") as day, COUNT(*) as trades, COUNT(DISTINCT "feePayer") as users,
@@ -87,14 +87,21 @@ async function fetchAllData() {
       SELECT "feePayer", ROUND(SUM(CASE WHEN "tokenIn"='${QUOTE_TOKEN}' THEN "uiAmountIn" ELSE "uiAmountOut" END)::numeric,2) as vol
       FROM axiomtrade_partitioned WHERE "receivedAt" >= '${COMP_START}' AND "receivedAt" < '${COMP_END}'
       GROUP BY 1 ORDER BY vol DESC LIMIT 5
+    `),
+    // Program Breakdown
+    query(`
+      SELECT "programId", COUNT(*) as trades,
+        ROUND(SUM(CASE WHEN "tokenIn"='${QUOTE_TOKEN}' THEN "uiAmountIn" ELSE "uiAmountOut" END)::numeric,2) as volume
+      FROM axiomtrade_partitioned WHERE "receivedAt" >= '${COMP_START}' AND "receivedAt" < '${COMP_END}'
+      GROUP BY 1 ORDER BY volume DESC
     `)
   ]);
 
-  return { dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders };
+  return { dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders, programBreakdown };
 }
 
 function generateHTML(data) {
-  const { dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders } = data;
+  const { dailyData, segments, newVsReturning, pnlLeaders, volumeLeaders, programBreakdown } = data;
 
   // Calculate metrics
   const baselineDays = dailyData.filter(d => new Date(d.day) < new Date(COMP_START));
@@ -107,6 +114,11 @@ function generateHTML(data) {
   const cVol = compDays.reduce((s, d) => s + Number(d.volume), 0) / compDays.length;
   const cTrades = compDays.reduce((s, d) => s + Number(d.trades), 0) / compDays.length;
   const cUsers = compDays.reduce((s, d) => s + Number(d.users), 0) / compDays.length;
+
+  // Totals for competition period
+  const totalCompVol = compDays.reduce((s, d) => s + Number(d.volume), 0);
+  const totalCompTrades = compDays.reduce((s, d) => s + Number(d.trades), 0);
+  const totalCompUsers = newVsReturning.reduce((s, d) => s + Number(d.cnt), 0);
 
   // Segments
   const seg = {};
@@ -124,6 +136,20 @@ function generateHTML(data) {
   const volLeaderSet = new Set(volumeLeaders.map(v => v.feePayer));
   const overlap = pnlLeaders.filter(p => volLeaderSet.has(p.feePayer));
 
+  // Program breakdown
+  const totalProgramVol = programBreakdown.reduce((s, p) => s + Number(p.volume), 0);
+  const totalProgramTrades = programBreakdown.reduce((s, p) => s + Number(p.trades), 0);
+  const programRows = programBreakdown.map(p => {
+    const volPct = ((Number(p.volume) / totalProgramVol) * 100).toFixed(1);
+    const tradePct = ((Number(p.trades) / totalProgramTrades) * 100).toFixed(1);
+    return `
+          <tr>
+            <td title="${p.programId}">${p.programId.slice(0, 8)}...${p.programId.slice(-4)}</td>
+            <td>${fmt(p.trades)} <span class="pct">(${tradePct}%)</span></td>
+            <td>${fmtMoney(p.volume)} <span class="pct">(${volPct}%)</span></td>
+          </tr>`;
+  }).join('');
+
   // Chart data
   const labels = dailyData.map(d => `Jan ${new Date(d.day).getDate()}`);
   const volData = dailyData.map(d => (Number(d.volume) / 1e6).toFixed(2));
@@ -131,7 +157,7 @@ function generateHTML(data) {
   const userData = dailyData.map(d => (Number(d.users) / 1000).toFixed(2));
 
   const compEndDay = new Date(COMP_END);
-  compEndDay.setDate(compEndDay.getDate() - 1);
+  compEndDay.setUTCDate(compEndDay.getUTCDate() - 1);
   const compDaysCount = compDays.length;
   const timestamp = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 
@@ -250,7 +276,11 @@ function generateHTML(data) {
     .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
     .metric-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 24px 28px; position: relative; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03); }
     .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.6; }
-    .metric-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 12px; }
+    .metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .metric-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); }
+    .metric-total { text-align: right; }
+    .metric-total-label { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 2px; }
+    .metric-total-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
     .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; line-height: 1; letter-spacing: -1px; }
     .metric-delta { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--accent-green); background: var(--accent-green-dim); padding: 4px 10px; border-radius: 6px; }
     .metric-delta span { font-family: 'Inter', sans-serif; font-weight: 400; color: var(--text-muted); font-size: 11px; }
@@ -311,6 +341,16 @@ function generateHTML(data) {
     .overlap-note { margin-top: 16px; padding: 12px; background: var(--primary-dim); border-radius: 10px; border-left: 3px solid var(--primary); }
     .overlap-note p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
     .overlap-note strong { color: var(--primary); }
+    .program-breakdown { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+    .program-breakdown h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; }
+    .program-table-mini { width: 100%; border-collapse: collapse; }
+    .program-table-mini th { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); text-align: left; padding: 0 0 8px 0; }
+    .program-table-mini th:nth-child(2), .program-table-mini th:nth-child(3) { text-align: right; }
+    .program-table-mini td { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 8px 0; color: var(--text-secondary); }
+    .program-table-mini td:first-child { font-size: 11px; }
+    .program-table-mini td:nth-child(2), .program-table-mini td:nth-child(3) { text-align: right; }
+    .program-table-mini tbody tr:not(:last-child) td { border-bottom: 1px solid var(--border-subtle); }
+    .program-table-mini .pct { color: var(--text-muted); font-size: 10px; }
     .integrity-panel { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 24px 28px; margin-top: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03); }
     .integrity-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
     .integrity-header-left h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
@@ -457,24 +497,42 @@ function generateHTML(data) {
         <div class="header-divider"></div>
         <div class="header-title">
           <h1>Trading Competition Analysis</h1>
-          <div class="period">Competition: Jan 19–${compEndDay.getDate()} · Baseline: Jan 12–18</div>
+          <div class="period">Competition: Jan 19–${compEndDay.getUTCDate()} · Baseline: Jan 12–18</div>
         </div>
       </div>
     </header>
 
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-label">Daily Volume</div>
+        <div class="metric-header">
+          <div class="metric-label">Daily Volume</div>
+          <div class="metric-total">
+            <div class="metric-total-label">Total</div>
+            <div class="metric-total-value">${fmtMoney(totalCompVol)}</div>
+          </div>
+        </div>
         <div class="metric-value">${fmtMoney(cVol)}</div>
         <div class="metric-delta">+${pctChange(cVol, bVol)}% <span>vs ${fmtMoney(bVol)} baseline</span></div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Daily Trades</div>
+        <div class="metric-header">
+          <div class="metric-label">Daily Trades</div>
+          <div class="metric-total">
+            <div class="metric-total-label">Total</div>
+            <div class="metric-total-value">${fmt(Math.round(totalCompTrades))}</div>
+          </div>
+        </div>
         <div class="metric-value">${fmt(Math.round(cTrades))}</div>
         <div class="metric-delta">+${pctChange(cTrades, bTrades)}% <span>vs ${fmt(Math.round(bTrades))} baseline</span></div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Daily Users</div>
+        <div class="metric-header">
+          <div class="metric-label">Daily Users</div>
+          <div class="metric-total">
+            <div class="metric-total-label">Total</div>
+            <div class="metric-total-value">${fmt(totalCompUsers)}</div>
+          </div>
+        </div>
         <div class="metric-value">${fmt(Math.round(cUsers))}</div>
         <div class="metric-delta">+${pctChange(cUsers, bUsers)}% <span>vs ${fmt(Math.round(bUsers))} baseline</span></div>
       </div>
@@ -526,6 +584,21 @@ function generateHTML(data) {
             <span class="user-stat-label">Returning Users</span>
             <span class="user-stat-value">${fmt(userTypes['Returning'])} (${100 - newPct}%)</span>
           </div>
+        </div>
+        <div class="program-breakdown">
+          <h4>Volume by Program</h4>
+          <table class="program-table-mini">
+            <thead>
+              <tr>
+                <th>Program</th>
+                <th>Trades</th>
+                <th>Volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${programRows}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -625,7 +698,7 @@ function generateHTML(data) {
     </div>
 
     <footer class="footer">
-      <div class="timestamp">Updated ${timestamp} · Data: Jan 19–${compEndDay.getDate()} (${compDaysCount} days)</div>
+      <div class="timestamp">Updated ${timestamp} · Data: Jan 19–${compEndDay.getUTCDate()} (${compDaysCount} days)</div>
     </footer>
   </div>
 
