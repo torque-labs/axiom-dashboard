@@ -216,6 +216,27 @@
       font-size: 11px;
     }
 
+    .metric-total {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      text-align: right;
+    }
+
+    .metric-total-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .metric-total-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     /* Charts Section */
     .charts-section {
       display: grid;
@@ -1016,19 +1037,31 @@
     <!-- Key Metrics -->
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-label">Daily Volume</div>
-        <div class="metric-value">$10.01M</div>
-        <div class="metric-delta">+93% <span>vs $5.19M baseline</span></div>
+        <div class="metric-label">Today's Volume</div>
+        <div class="metric-value">$5.21M</div>
+        <div class="metric-delta">+7% <span>vs $4.87M baseline avg</span></div>
+        <div class="metric-total">
+          <div class="metric-total-value">$40.04M</div>
+          <div class="metric-total-label">Total Volume</div>
+        </div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Daily Trades</div>
-        <div class="metric-value">123,566</div>
-        <div class="metric-delta">+123% <span>vs 55,351 baseline</span></div>
+        <div class="metric-label">Today's Trades</div>
+        <div class="metric-value">69,307</div>
+        <div class="metric-delta">+34% <span>vs 51,588 baseline avg</span></div>
+        <div class="metric-total">
+          <div class="metric-total-value">494,264</div>
+          <div class="metric-total-label">Total Trades</div>
+        </div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Daily Users</div>
-        <div class="metric-value">10,857</div>
-        <div class="metric-delta">+61% <span>vs 6,724 baseline</span></div>
+        <div class="metric-label">Today's Users</div>
+        <div class="metric-value">8,718</div>
+        <div class="metric-delta">+36% <span>vs 6,405 baseline avg</span></div>
+        <div class="metric-total">
+          <div class="metric-total-value">24,683</div>
+          <div class="metric-total-label">Total Users</div>
+        </div>
       </div>
     </div>
 
@@ -1074,7 +1107,7 @@
         <div class="segment-list">
           <div class="segment-row">
             <div class="segment-header">
-              <span class="segment-name">Mid-Tier <small>$10K–$100K</small></span>
+              <span class="segment-name">🐬 Dolphins <small>$10K–$100K</small></span>
               <span class="segment-value">$17.9M</span>
             </div>
             <div class="segment-bar-bg">
@@ -1087,7 +1120,7 @@
           </div>
           <div class="segment-row">
             <div class="segment-header">
-              <span class="segment-name">Participants <small>$1K–$10K</small></span>
+              <span class="segment-name">🐟 Minnows <small>$1K–$10K</small></span>
               <span class="segment-value">$16.4M</span>
             </div>
             <div class="segment-bar-bg">
@@ -1100,7 +1133,7 @@
           </div>
           <div class="segment-row">
             <div class="segment-header">
-              <span class="segment-name">Casual <small>&lt;$1K</small></span>
+              <span class="segment-name">🦐 Shrimp <small>&lt;$1K</small></span>
               <span class="segment-value">$4.1M</span>
             </div>
             <div class="segment-bar-bg">
@@ -1113,7 +1146,7 @@
           </div>
           <div class="segment-row">
             <div class="segment-header">
-              <span class="segment-name">Whales <small>&gt;$100K</small></span>
+              <span class="segment-name">🐋 Whales <small>&gt;$100K</small></span>
               <span class="segment-value">$1.6M</span>
             </div>
             <div class="segment-bar-bg">
@@ -1416,9 +1449,9 @@
       const labels = ['Jan 12', 'Jan 13', 'Jan 14', 'Jan 15', 'Jan 16', 'Jan 17', 'Jan 18', 'Jan 19', 'Jan 20', 'Jan 21', 'Jan 22'];
 
       // Daily data
-      const volumeData = [5.09, 8.08, 11.55, 5.34, 1.42, 1.67, 3.15, 13.43, 7.61, 13.79, 5.21];
-      const tradesData = [57.1, 86.4, 123.1, 55.1, 11.6, 16.7, 37.5, 145.1, 98.0, 181.8, 69.3];
-      const usersData = [6.99, 9.66, 11.04, 7.55, 3.07, 3.50, 5.25, 10.86, 10.39, 13.46, 8.72];
+      const volumeData = [2.86, 8.08, 11.55, 5.34, 1.42, 1.67, 3.15, 13.43, 7.61, 13.79, 5.21];
+      const tradesData = [30.8, 86.4, 123.1, 55.1, 11.6, 16.7, 37.5, 145.1, 98.0, 181.8, 69.3];
+      const usersData = [4.77, 9.66, 11.04, 7.55, 3.07, 3.50, 5.25, 10.86, 10.39, 13.46, 8.72];
 
       const chartColors = {
         baseline: 'rgba(161, 161, 170, 0.8)',
@@ -1533,7 +1566,7 @@
               }
             },
             annotation: {
-              annotations: createAnnotations(baselineVolumeAvg, '$5.19M')
+              annotations: createAnnotations(baselineVolumeAvg, '$4.87M')
             }
           }
         }
@@ -1563,7 +1596,7 @@
               }
             },
             annotation: {
-              annotations: createAnnotations(baselineTradesAvg, '55.4K')
+              annotations: createAnnotations(baselineTradesAvg, '51.6K')
             }
           }
         }
@@ -1593,7 +1626,7 @@
               }
             },
             annotation: {
-              annotations: createAnnotations(baselineUsersAvg, '6.7K')
+              annotations: createAnnotations(baselineUsersAvg, '6.4K')
             }
           }
         }
