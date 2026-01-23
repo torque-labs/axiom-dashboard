@@ -435,6 +435,54 @@
       color: var(--text-primary);
     }
 
+    .program-table {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .program-header {
+      display: grid;
+      grid-template-columns: 70px 1fr 1fr 1fr;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      padding-bottom: 4px;
+      text-align: right;
+    }
+
+    .program-header span:first-child {
+      text-align: left;
+    }
+
+    .program-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .program-row:last-child {
+      border-bottom: none;
+    }
+
+    .program-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .program-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
     /* Leaderboard */
     .leaderboard {
       display: flex;
@@ -1107,15 +1155,28 @@
         <div class="segment-list">
           <div class="segment-row">
             <div class="segment-header">
-              <span class="segment-name">🐬 Dolphins <small>$10K–$100K</small></span>
-              <span class="segment-value">$17.9M</span>
+              <span class="segment-name">🐋 Whales <small>&gt;$50K</small></span>
+              <span class="segment-value">$4.6M</span>
             </div>
             <div class="segment-bar-bg">
-              <div class="segment-bar mid" data-width="100"></div>
+              <div class="segment-bar whale" data-width="28"></div>
             </div>
             <div class="segment-meta">
-              <span>851 users</span>
-              <span>45%</span>
+              <span>55 users</span>
+              <span>11%</span>
+            </div>
+          </div>
+          <div class="segment-row">
+            <div class="segment-header">
+              <span class="segment-name">🐬 Dolphins <small>$10K–$50K</small></span>
+              <span class="segment-value">$15.0M</span>
+            </div>
+            <div class="segment-bar-bg">
+              <div class="segment-bar mid" data-width="91"></div>
+            </div>
+            <div class="segment-meta">
+              <span>806 users</span>
+              <span>37%</span>
             </div>
           </div>
           <div class="segment-row">
@@ -1124,7 +1185,7 @@
               <span class="segment-value">$16.4M</span>
             </div>
             <div class="segment-bar-bg">
-              <div class="segment-bar participant" data-width="92"></div>
+              <div class="segment-bar participant" data-width="100"></div>
             </div>
             <div class="segment-meta">
               <span>5,286 users</span>
@@ -1137,24 +1198,11 @@
               <span class="segment-value">$4.1M</span>
             </div>
             <div class="segment-bar-bg">
-              <div class="segment-bar casual" data-width="23"></div>
+              <div class="segment-bar casual" data-width="25"></div>
             </div>
             <div class="segment-meta">
-              <span>18,536 users</span>
+              <span>18,541 users</span>
               <span>10%</span>
-            </div>
-          </div>
-          <div class="segment-row">
-            <div class="segment-header">
-              <span class="segment-name">🐋 Whales <small>&gt;$100K</small></span>
-              <span class="segment-value">$1.6M</span>
-            </div>
-            <div class="segment-bar-bg">
-              <div class="segment-bar whale" data-width="9"></div>
-            </div>
-            <div class="segment-meta">
-              <span>10 users</span>
-              <span>4%</span>
             </div>
           </div>
         </div>
@@ -1168,6 +1216,30 @@
           <div class="user-stat">
             <span class="user-stat-label">Returning Users</span>
             <span class="user-stat-value">11,271 (46%)</span>
+          </div>
+        </div>
+
+        <div class="user-breakdown">
+          <h4>Program Breakdown</h4>
+          <div class="program-table">
+            <div class="program-header">
+              <span></span>
+              <span>Users</span>
+              <span>Trades</span>
+              <span>Volume</span>
+            </div>
+            <div class="program-row">
+              <span class="program-name">Launchlab</span>
+              <span class="program-value">20,119</span>
+              <span class="program-value">346,029</span>
+              <span class="program-value">$26.3M</span>
+            </div>
+            <div class="program-row">
+              <span class="program-name">CPMM</span>
+              <span class="program-value">14,410</span>
+              <span class="program-value">148,289</span>
+              <span class="program-value">$13.7M</span>
+            </div>
           </div>
         </div>
       </div>
